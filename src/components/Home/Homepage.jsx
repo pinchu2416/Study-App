@@ -83,13 +83,13 @@ function HomePage() {
       {/* Section */}
       <div id="faveclanbtn" className="-mt-[290px]  ml-270 hidden lg:block">
       <h1 className="text-8xl font-bold text-cyan-200 [text-shadow:0px_0px_4px_rgb(98,228,255),0px_0px_8px_rgb(98,228,255)] tracking-wider -ml-33">FAVECLAN</h1>
-        <p className="text-[2.5rem] mt-2 -ml-55 tracking-wide text-yellow-200 [text-shadow:0px_0px_4px_rgb(98,228,255),0px_0px_7px_rgb(98,228,255)]">The battle begins with your vote !</p>
-        <button className="bg-gradient-to-r from-[#3a675d] to-[#9ba4c8] 
+        <p className="text-[2.5rem] mt-2 -ml-55 tracking-wide text-yellow-200 [text-shadow:0px_0px_4px_rgb(98,228,255),0px_0px_7px_rgb(98,228,255)] pb-7">The battle begins with your vote !</p>
+        <a className="bg-gradient-to-r from-[#3a675d] to-[#9ba4c8] 
         text-black font-bold text-xl uppercase px-6 py-3 
         rounded-[20px] shadow-lg transition-all duration-300 
         hover:scale-105 hover:shadow-xl 
       hover:from-[#4198b7] hover:to-[#21295b] 
-        active:scale-95 mt-5 ml-[43px]">LOGIN</button>
+        active:scale-95 ml-[40px]" href="#">LOGIN</a>
       </div>
 
       {/* Mobile Auto-Play Slider (One Image at a Time) */}
@@ -97,18 +97,18 @@ function HomePage() {
 
 
       {/* Mobile View (Hidden on Laptops) */}
-     <div id="faveclanbtn-mobile" className="block lg:hidden  flex-col items-center text-center px-4 mt-10">
-     <h1 className="mt-2 text-6xl sm:text-6xl font-bold text-cyan-300 [text-shadow:0px_0px_2px_rgb(98,228,255),0px_0px_5px_rgb(98,228,255)] tracking-wide">
+     <div id="faveclanbtn-mobile" className="block lg:hidden text-center px-4">
+     <h1 className=" text-6xl sm:text-6xl font-bold text-cyan-300 [text-shadow:0px_0px_2px_rgb(98,228,255),0px_0px_5px_rgb(98,228,255)] tracking-wide mt-5">
     FAVECLAN
      </h1>
-     <p className="text-2xl sm:text-2xl mt-2 text-yellow-200">
-    The battle begins with your vote!
+     <p className="text-2xl sm:text-2xl mt-2 text-yellow-200 pb-7">
+    The battle begins with your vote !
      </p>
      <a className="bg-gradient-to-r from-[#3a675d] to-[#9ba4c8] 
     text-black font-bold text-xl uppercase px-6 py-3 
     rounded-[20px] shadow-lg transition-all duration-300 
     hover:scale-105 hover:shadow-xl hover:from-[#4198b7] hover:to-[#21295b] 
-    active:scale-95 mt-5" href="#"> LOGIN</a>
+    active:scale-95 mt-6" href="#"> LOGIN</a>
    </div>
 
        {/* Radial gradient */}
@@ -117,22 +117,22 @@ function HomePage() {
     </div>
 
     {/* fictional voting for laptop*/}
-    <div className=" bg-[#040d24]  flex-col items-center hidden lg:block absolute left-[30%] top-[90%] transform -translate-y-1/2 w-[42%] h-[300px] border-2 border-[#50c2ccaf] rounded-lg shadow-lg text-center text-white p-10 mt-3">
+    <div className=" bg-[#040d24]  flex-col items-center hidden lg:block absolute left-[28%] top-[94%] transform -translate-y-1/2 w-[42%] h-[300px] border-2 border-[#50c2ccaf] rounded-lg shadow-lg text-center text-white p-10 mt-3">
       <h1 className="mt-7 text-5xl font-bold text-cyan-300 mb-4">Fictional Character Voting </h1>
-      <p className="text-3xl text-yellow-200 mb-6">" Vote For Your Favorite Fictional Characters "</p>
+      <p className="text-3xl text-yellow-200 mb-6 ">" Vote For Your Favorite Fictional Characters "</p>
       <a className="bg-gradient-to-r from-[#3a675d] to-[#9ba4c8] 
     text-black font-bold text-xl uppercase px-6 py-3 
     rounded-[20px] shadow-lg transition-all duration-300 
     hover:scale-105 hover:shadow-xl hover:from-[#4198b7] hover:to-[#21295b] 
-    active:scale-95 mt-5" href="#">START POLLING</a>
+    active:scale-95 mt-6 -ml-3" href="#">START POLLING</a>
     </div>
 
     {/* Fictional Voting Section for Mobile */}
-    {/* <div className="lg:hidden bg-[#040d24] flex flex-col items-center text-center text-white p-6 mt-10">
+        <div className="lg:hidden bg-[#040d24]  flex-col items-center absolute left-[30%] top-[95%] transform -translate-y-1/2 w-[95%] h-[270px] border-2 border-[#50c2ccaf] rounded-lg shadow-lg text-center text-white p-10 -ml-[113.2px] ">
           <h1 className="text-3xl font-bold text-cyan-300">Fictional Character Voting</h1>
-          <p className="text-xl text-yellow-200 mt-2">Vote for Your Favorite Fictional Characters</p>
-          <a className="mt-5 px-6 py-3 bg-gradient-to-r from-[#3a675d] to-[#9ba4c8] text-black font-bold text-xl uppercase rounded-[20px] shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:from-[#4198b7] hover:to-[#21295b] active:scale-95" href="#">START POLLING</a>
-        </div> */}
+          <p className="text-lg text-yellow-200 mt-2 pb-4">Vote for Your Favorite Fictional Characters</p>
+          <a className="mt-5 px-5 py-3 bg-gradient-to-r from-[#3a675d] to-[#9ba4c8] text-black font-bold text-lg uppercase rounded-[20px] shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:from-[#4198b7] hover:to-[#21295b] active:scale-95"  href="#">START POLLING</a>
+        </div>
     </>
   );
 }
