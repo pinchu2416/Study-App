@@ -128,7 +128,7 @@ function HomePage() {
     </div>
 
     {/* Fictional Voting Section for Mobile */}
-        <div className="lg:hidden bg-[#040d24]  flex-col items-center absolute left-[30%] top-[95%] transform -translate-y-1/2 w-[95%] h-[270px] border-2 border-[#50c2ccaf] rounded-lg shadow-lg text-center text-white p-10 -ml-[113.2px] ">
+        <div className="lg:hidden bg-[#040d24]  flex-col items-center absolute left-[30%] top-[96%] transform -translate-y-1/2 w-[95%] h-[270px] border-2 border-[#50c2ccaf] rounded-lg shadow-lg text-center text-white p-10 -ml-[113.2px] ">
           <h1 className="text-3xl font-bold text-cyan-300">Fictional Character Voting</h1>
           <p className="text-lg text-yellow-200 mt-2 pb-4">Vote for Your Favorite Fictional Characters</p>
           <a className="mt-5 px-5 py-3 bg-gradient-to-r from-[#3a675d] to-[#9ba4c8] text-black font-bold text-lg uppercase rounded-[20px] shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:from-[#4198b7] hover:to-[#21295b] active:scale-95"  href="#">START POLLING</a>
