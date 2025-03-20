@@ -22,10 +22,10 @@ function MobileSlider() {
   return (
     <div className="relative w-full max-w-md mx-auto mt-6">
       {/* Single Image Display */}
-      <img src={images[currentIndex()]} className="md:hidden w-80 h-100 ml-11 -mt-7 blur-xxs opacity-30 object-cover rounded-lg transition-opacity duration-700 ease-in-out" alt="slide" />
+      <img src={images[currentIndex()]} className="md:hidden w-80 h-100 ml-11 -mt-7 object-cover rounded-lg transition-opacity duration-700 ease-in-out" alt="slide" />
 
       {/* Navigation Dots */}
-      <div className=" md:hidden flex justify-center mt-4 space-x-2">
+      <div className=" md:hidden flex justify-center mt-6 space-x-2">
         {images.map((_, idx) => (
           <button
             onClick={() => setCurrentIndex(idx)}
@@ -61,12 +61,13 @@ function HomePage() {
         </button>
       </nav>
 
-      {/* Mobile Menu (IGNORE THIS NOW)
-      <ul id="mobile-menu" className="md:hidden flex flex-col items-center space-y-4 text-xl mt-4">
+      {/* Mobile Menu (IGNORE THIS NOW) */}
+      {/* <ul id="mobile-menu" className="md:hidden flex flex-col items-center space-y-4 text-xl mt-4">
         <li><a href="#" className="text-white hover:text-gray-300">HOME</a></li>
         <li><a href="#" className="text-white hover:text-gray-300">ABOUT</a></li>
         <li><a href="#" className="text-white hover:text-gray-300">SIGN UP</a></li>
-      </ul> */}
+      </ul>  */}
+      
 
       {/* Image Gallery */}
       <div className="mt-[40px] justify-center hidden lg:block">
@@ -81,10 +82,10 @@ function HomePage() {
 
       {/* Section */}
       <div id="faveclanbtn" className="-mt-[290px]  ml-270 hidden lg:block">
-      <h1 className="text-8xl font-bold [text-shadow:0px_0px_2px_rgb(98,228,255),0px_0px_5px_rgb(98,228,255)] tracking-wider -ml-33">FAVECLAN</h1>
+      <h1 className="text-8xl font-bold text-cyan-200 [text-shadow:0px_0px_4px_rgb(98,228,255),0px_0px_8px_rgb(98,228,255)] tracking-wider -ml-33">FAVECLAN</h1>
         <p className="text-[2.5rem] mt-2 -ml-55 tracking-wide text-yellow-200 [text-shadow:0px_0px_4px_rgb(98,228,255),0px_0px_7px_rgb(98,228,255)]">The battle begins with your vote !</p>
         <button className="bg-gradient-to-r from-[#3a675d] to-[#9ba4c8] 
-        text-black font-bold text-lg uppercase px-6 py-3 
+        text-black font-bold text-xl uppercase px-6 py-3 
         rounded-[20px] shadow-lg transition-all duration-300 
         hover:scale-105 hover:shadow-xl 
       hover:from-[#4198b7] hover:to-[#21295b] 
@@ -97,25 +98,41 @@ function HomePage() {
 
       {/* Mobile View (Hidden on Laptops) */}
      <div id="faveclanbtn-mobile" className="block lg:hidden  flex-col items-center text-center px-4 mt-10">
-     <h1 className="text-6xl sm:text-6xl font-bold text-cyan-300 tracking-wide">
+     <h1 className="mt-2 text-6xl sm:text-6xl font-bold text-cyan-300 [text-shadow:0px_0px_2px_rgb(98,228,255),0px_0px_5px_rgb(98,228,255)] tracking-wide">
     FAVECLAN
      </h1>
      <p className="text-2xl sm:text-2xl mt-2 text-yellow-200">
     The battle begins with your vote!
      </p>
-     <button className="bg-gradient-to-r from-[#3a675d] to-[#9ba4c8] 
+     <a className="bg-gradient-to-r from-[#3a675d] to-[#9ba4c8] 
     text-black font-bold text-xl uppercase px-6 py-3 
     rounded-[20px] shadow-lg transition-all duration-300 
     hover:scale-105 hover:shadow-xl hover:from-[#4198b7] hover:to-[#21295b] 
-    active:scale-95 mt-5">
-    LOGIN
-     </button>
+    active:scale-95 mt-5" href="#"> LOGIN</a>
    </div>
 
        {/* Radial gradient */}
        <div className="absolute w-199 h-120 bg-[radial-gradient(circle,_rgba(80,194,204,0.6)_10%,_rgba(0,14,51,0)_90%)] blur-xl opacity-30 pointer-events-none hidden lg:block"
-       style={{ top: "45%", left: "70%", transform: "translate(-50%, -50%)" }}></div>
+       style={{ top: "40%", left: "70%", transform: "translate(-50%, -50%)" }}></div>
     </div>
+
+    {/* fictional voting for laptop*/}
+    <div className=" bg-[#040d24]  flex-col items-center hidden lg:block absolute left-[30%] top-[90%] transform -translate-y-1/2 w-[42%] h-[300px] border-2 border-[#50c2ccaf] rounded-lg shadow-lg text-center text-white p-10 mt-3">
+      <h1 className="mt-7 text-5xl font-bold text-cyan-300 mb-4">Fictional Character Voting </h1>
+      <p className="text-3xl text-yellow-200 mb-6">" Vote For Your Favorite Fictional Characters "</p>
+      <a className="bg-gradient-to-r from-[#3a675d] to-[#9ba4c8] 
+    text-black font-bold text-xl uppercase px-6 py-3 
+    rounded-[20px] shadow-lg transition-all duration-300 
+    hover:scale-105 hover:shadow-xl hover:from-[#4198b7] hover:to-[#21295b] 
+    active:scale-95 mt-5" href="#">START POLLING</a>
+    </div>
+
+    {/* Fictional Voting Section for Mobile */}
+    {/* <div className="lg:hidden bg-[#040d24] flex flex-col items-center text-center text-white p-6 mt-10">
+          <h1 className="text-3xl font-bold text-cyan-300">Fictional Character Voting</h1>
+          <p className="text-xl text-yellow-200 mt-2">Vote for Your Favorite Fictional Characters</p>
+          <a className="mt-5 px-6 py-3 bg-gradient-to-r from-[#3a675d] to-[#9ba4c8] text-black font-bold text-xl uppercase rounded-[20px] shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:from-[#4198b7] hover:to-[#21295b] active:scale-95" href="#">START POLLING</a>
+        </div> */}
     </>
   );
 }
