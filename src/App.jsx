@@ -1,7 +1,7 @@
-import HomePage from "./components/Home/About";
+import filesharing from "./components/Filesharing";
 
 function App() {
-  return <HomePage />;
+  return <filesharing />;
 }
 
 export default App;

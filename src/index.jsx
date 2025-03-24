@@ -4,9 +4,7 @@ import { render } from 'solid-js/web';
 
 import "./styles/global.css";
 import { Route, Router } from '@solidjs/router';
-import HomePage from './components/Home/Home';
-import About from './components/Home/About';
-import Login from "./components/Login/Login";
+import filesharing from './components/Filesharing/Filesharing';
 
 const root = document.getElementById('root');
 
@@ -17,8 +15,6 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
 }
 
 render(() => <Router>
-  <Route path="/about" component={About}/>
-  <Route path="/" component={HomePage}/>
-  <Route path="/login" component={Login} />
+  <Route path="/" component={filesharing}/>
 </Router>
 , root);
