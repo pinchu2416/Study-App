@@ -6,7 +6,6 @@ import anime2 from "../../assets/anime2.jpeg";
 import novel from "../../assets/novel.jpeg";
 import bollywood from "../../assets/bollywood.jpeg";
 import anime3 from "../../assets/anime3.jpeg";
-import bgimage from "../../assets/bg.jpeg";
 
 function FileSharing() { //this function is for our file sharing app
   const [files, setFiles] = createSignal([]); //keeps track of the uploaded file and starts with empty
@@ -68,16 +67,8 @@ function FileSharing() { //this function is for our file sharing app
 
   return (
     <>
-  <div
-    class=" inset-0 w-full min-h-[120vh] flex flex-col items-center justify-center overflow-hidden"
-  >
-    <div class=" inset-0 bg-black opacity-50"></div>
-    <img
-      class="absolute inset-0 w-full min-h-[120vh] object-cover blur-2x1"
-      src={bgimage}
-      alt="background"
-    />
-    <nav class="flex items-center justify-between px-10 py-7 w-full z-0">
+    <div class="bg-[#0b1121] hidden lg:flex min-h-[120vh] w-full flex-col items-center">
+      <nav class="flex items-center justify-between px-10 py-7 w-full">
         <div class="flex items-center">
           <img class="h-8 sm:h-8 md:h-15" src={logo} alt="Logo" />
           <h3 class="ml-1 text-2xl sm:text-xl md:text-2xl text-gray-300 font-bold tracking-wider">
@@ -142,7 +133,7 @@ function FileSharing() { //this function is for our file sharing app
  </nav>
 
       {/* Tabs */}
-      <div class="flex space-x-4 -mt-4 -ml-175 z-0">
+      <div class="flex space-x-4 -mt-4 -ml-175">
         <button
           class={`px-4 py-2 rounded-lg ${
             selectedTab() === "tab1" ? "bg-blue-500 text-white" : "bg-gray-700 text-gray-300"
@@ -163,7 +154,7 @@ function FileSharing() { //this function is for our file sharing app
 
       {/* Show File Upload Section Only for Tab 1 */}
       <Show when={selectedTab() === "tab2"}>
-        <div class="w-2/3 max-w-lg bg-gray-900 p-4 rounded-lg transition-all -ml-173 mt-4 pointer-events-auto z-0"
+        <div class="w-2/3 max-w-lg bg-gray-900 p-4 rounded-lg transition-all -ml-173 mt-4 pointer-events-auto"
           style={{ height: uploading() || files().length > 0 || showPrompt() || showEmailPrompt() ? 'auto' : '12rem' }}> {/* dynamically extends the height of the box  */}    
           <div class="w-full h-40 border-2 border-dashed border-gray-500 rounded-lg flex flex-col items-center justify-center text-gray-300 hover:border-blue-400 transition-all cursor-pointer">
             <p class="text-2xl pb-2">Drop your files here.</p>
@@ -231,7 +222,7 @@ function FileSharing() { //this function is for our file sharing app
       </Show>
       <Show when={selectedTab() === "tab1"}>
   <div 
-    class="text-white 5 mt-4 flex flex-col items-center -ml-176 bg-gray-900 z-0 rounded-2xl w-2/3 max-w-md transition-all p-4"
+    class="text-white 5 mt-4 flex flex-col items-center -ml-176 bg-gray-900 rounded-2xl w-2/3 max-w-md transition-all p-4"
     style={{ height: urlShorten() ? 'auto' : '27rem' }} // Expands dynamically
   >
     <img class="w-60 h-auto rounded-2xl -ml-5" loading="lazy" src={url} alt="url" />
@@ -274,7 +265,7 @@ function FileSharing() { //this function is for our file sharing app
   </div>
 </Show>
 {/* image gallery */}
-<div className="hidden lg:block top-[40%] transform -translate-y-1/2 pointer-events-none ml-45">  
+<div className="hidden lg:block absolute top-[40%] transform -translate-y-1/2 pointer-events-none ml-45">  
         <div className="max-w-[100%] h-[300px] lg:flex justify-end space-x-0.5">
           <img src={anime1} alt="Anime 1" className="w-[10%] object-cover rounded-lg border-2 border-[#50c2ccaf] transition-all duration-500 ease-in-out hover:w-[25%] pointer-events-auto" />
           <img src={anime2} alt="Anime 2" className="w-[10%] object-cover rounded-lg border-2 border-[#50c2ccaf] transition-all duration-500 ease-in-out hover:w-[25%] pointer-events-auto" />
@@ -284,8 +275,8 @@ function FileSharing() { //this function is for our file sharing app
         </div>
       </div>
       <div id="faveclanbtn" className="-mt-[290px]  ml-240 hidden lg:flex">
-      <h1 className="text-8xl font-bold flex top-[73%] transform -translate-y-1/2 text-cyan-300 [text-shadow:0px_0px_3px_rgb(98,228,255),0px_0px_6px_rgb(98,228,255)] tracking-wider -ml-98">DOCFLOW</h1>
-      <p className="text-[2.5rem] flex top-[85%] transform -translate-y-1/2 -ml-127 tracking-wide text-yellow-200 ">DocFlow: Share Smarter, Access Faster !</p>
+      <h1 className="text-8xl font-bold absolute top-[73%] transform -translate-y-1/2 text-cyan-300 [text-shadow:0px_0px_3px_rgb(98,228,255),0px_0px_6px_rgb(98,228,255)] tracking-wider -ml-98">DOCFLOW</h1>
+      <p className="text-[2.5rem] absolute top-[85%] transform -translate-y-1/2 -ml-127 tracking-wide text-yellow-200 ">DocFlow: Share Smarter, Access Faster !</p>
       </div>
     </div>
     </>
