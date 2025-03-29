@@ -1,4 +1,83 @@
-<nav class="flex items-center absolute justify-between px-10 py-7 w-full -mt-175">
+import { createSignal, Show, For } from "solid-js"; //createsignal helps to store and update values show displays the things only if it is needed and for is a loop
+import logo from "../../assets/logo.png";
+import url from "../../assets/url.jpeg"
+import anime1 from "../../assets/anime1.jpeg";
+import anime2 from "../../assets/anime2.jpeg";
+import novel from "../../assets/novel.jpeg";
+import bollywood from "../../assets/bollywood.jpeg";
+import anime3 from "../../assets/anime3.jpeg";
+import bgimage from "../../assets/bg.jpeg";
+
+function FileSharing() { //this function is for our file sharing app
+  const [files, setFiles] = createSignal([]); //keeps track of the uploaded file and starts with empty
+  const [progress, setProgress] = createSignal(0); //Tracks the upload progress (starts at 0%)
+  const [uploading, setUploading] = createSignal(false); //Checks if something is currently uploading (starts as false)
+  const [showPrompt, setShowPrompt] = createSignal(false); //Controls if the "Share File" options should be shown.
+  const [showEmailPrompt, setShowEmailPrompt] = createSignal(false); //Controls if the "Enter Email" box should be shown.
+  const [email, setEmail] = createSignal(""); //Stores the email entered by the user (starts empty).
+  const [selectedTab, setSelectedTab] = createSignal("tab1"); //controls the tab switching part.
+  const [urlInput, seturlInput] = createSignal(""); // stores the url input and the seturlInput updates the ui whenever a value changes(reactive signal)
+  const [urlShorten, seturlShorten] = createSignal(""); //controls the url shortner part
+
+  const simulateUpload = () => { //This function "pretends" to upload a file. FAKE UPLOADER 
+    setUploading(true); //Marks upload as "started".
+    setProgress(0);  //Resets the progress bar to 0%.
+    let uploadInterval = setInterval(() => { //Starts a timer that runs every 200ms and Slowly increases the upload percentage.
+      setProgress((prev) => {
+        if (prev >= 100) { //If progress reaches 100%, stop the timer.
+          clearInterval(uploadInterval);
+          setTimeout(() => { //After a short delay, hide "Uploading..." and show sharing options.
+            setUploading(false); //hides the uploading part
+            setShowPrompt(true); //the prompt is shown
+          }, 500);
+          return 100;
+        }
+        return prev + 5; //Increase the progress by 5% every 200ms.
+      });
+    }, 200);
+  };
+
+  const handleFileSelect = (event) => { //This function runs when a user picks a file.
+    const selected = event.target.files[0]; //Gets the first file.
+    if (!selected) return; //If no file is selected, do nothing.
+
+    if (files().length>=1){ //can take upto 1 files at a time
+      alert("You can take 1 file at a time to share");
+      return;
+    }
+
+    const fileData = {
+      file: selected, // file → Stores the file itself
+      url: URL.createObjectURL(selected),  //url → Creates a temporary link to preview the file
+      expiresAt: Date.now() + 24 * 60 * 60 * 1000, //expiresAt → Sets an expiration time (24 hours later).
+    };
+
+    setFiles([...files(), fileData]); //Adds the file to the list.
+    simulateUpload(); //Starts the upload process.
+  };
+
+  const sendEmail = () => { //Function to "send" the file via email.
+    if (!email()) { //If the email box is empty, show an alert
+      alert("Please enter an email!");
+      return;
+    }
+    alert(`File sent to ${email()}`);
+    setShowEmailPrompt(false);
+    setShowPrompt(false);
+  };
+
+  return (
+    <>
+  <div
+    class=" inset-0 w-full min-h-[120vh] flex flex-col items-center justify-center overflow-hidden"
+  >
+    <div class=" inset-0 bg-black opacity-50"></div>
+    <img
+      class="absolute inset-0 w-full min-h-[120vh] object-cover blur-2x1"
+      src={bgimage}
+      alt="background"
+    />
+    <nav class="flex items-center justify-between px-10 py-7 w-full z-0">
         <div class="flex items-center">
           <img class="h-8 sm:h-8 md:h-15" src={logo} alt="Logo" />
           <h3 class="ml-1 text-2xl sm:text-xl md:text-2xl text-gray-300 font-bold tracking-wider">
@@ -63,7 +142,7 @@
  </nav>
 
       {/* Tabs */}
-      <div class="flex space-x-4 absolute -mt-130 -ml-175">
+      <div class="flex space-x-4 -mt-4 -ml-175 z-0">
         <button
           class={`px-4 py-2 rounded-lg ${
             selectedTab() === "tab1" ? "bg-blue-500 text-white" : "bg-gray-700 text-gray-300"
@@ -84,7 +163,7 @@
 
       {/* Show File Upload Section Only for Tab 1 */}
       <Show when={selectedTab() === "tab2"}>
-        <div class="w-2/3 max-w-lg bg-gray-900 p-4 rounded-lg transition-all -ml-173 -mt-130 pointer-events-auto"
+        <div class="w-2/3 max-w-lg bg-gray-900 p-4 rounded-lg transition-all -ml-173 mt-4 pointer-events-auto z-0"
           style={{ height: uploading() || files().length > 0 || showPrompt() || showEmailPrompt() ? 'auto' : '12rem' }}> {/* dynamically extends the height of the box  */}    
           <div class="w-full h-40 border-2 border-dashed border-gray-500 rounded-lg flex flex-col items-center justify-center text-gray-300 hover:border-blue-400 transition-all cursor-pointer">
             <p class="text-2xl pb-2">Drop your files here.</p>
@@ -152,7 +231,7 @@
       </Show>
       <Show when={selectedTab() === "tab1"}>
   <div 
-    class="text-white 5 -mt-74 flex flex-col items-center -ml-176 bg-gray-900 rounded-2xl w-2/3 max-w-md transition-all p-4"
+    class="text-white 5 mt-4 flex flex-col items-center -ml-176 bg-gray-900 z-0 rounded-2xl w-2/3 max-w-md transition-all p-4"
     style={{ height: urlShorten() ? 'auto' : '27rem' }} // Expands dynamically
   >
     <img class="w-60 h-auto rounded-2xl -ml-5" loading="lazy" src={url} alt="url" />
@@ -195,7 +274,7 @@
   </div>
 </Show>
 {/* image gallery */}
-<div className="hidden lg:block absolute top-[40%] transform -translate-y-1/2 pointer-events-none ml-45">  
+<div className="hidden lg:block top-[40%] transform -translate-y-1/2 pointer-events-none ml-45">  
         <div className="max-w-[100%] h-[300px] lg:flex justify-end space-x-0.5">
           <img src={anime1} alt="Anime 1" className="w-[10%] object-cover rounded-lg border-2 border-[#50c2ccaf] transition-all duration-500 ease-in-out hover:w-[25%] pointer-events-auto" />
           <img src={anime2} alt="Anime 2" className="w-[10%] object-cover rounded-lg border-2 border-[#50c2ccaf] transition-all duration-500 ease-in-out hover:w-[25%] pointer-events-auto" />
@@ -205,13 +284,12 @@
         </div>
       </div>
       <div id="faveclanbtn" className="-mt-[290px]  ml-240 hidden lg:flex">
-      <h1 className="text-8xl font-bold absolute top-[73%] transform -translate-y-1/2 text-cyan-300 [text-shadow:0px_0px_3px_rgb(98,228,255),0px_0px_6px_rgb(98,228,255)] tracking-wider -ml-98">DOCFLOW</h1>
-      <p className="text-[2.5rem] absolute top-[85%] transform -translate-y-1/2 -ml-127 tracking-wide text-yellow-200 ">DocFlow: Share Smarter, Access Faster !</p>
+      <h1 className="text-8xl font-bold flex top-[73%] transform -translate-y-1/2 text-cyan-300 [text-shadow:0px_0px_3px_rgb(98,228,255),0px_0px_6px_rgb(98,228,255)] tracking-wider -ml-98">DOCFLOW</h1>
+      <p className="text-[2.5rem] flex top-[85%] transform -translate-y-1/2 -ml-127 tracking-wide text-yellow-200 ">DocFlow: Share Smarter, Access Faster !</p>
       </div>
-      </div>
+    </div>
     </>
   );
 }
-
 
 export default FileSharing;
