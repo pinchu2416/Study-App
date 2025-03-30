@@ -2,3 +2,36 @@
 @plugin "daisyui"{
     themes: all;
 }
+@layer components {
+    @keyframes words {
+      0%,40% { content: "Fast"; }
+      41%,80% { content: "Secure"; }
+      81%,100% { content: "Hassle-Free"; }
+    }
+  
+    @keyframes typing {
+      10%,35%,60%,85% { width: 0; }
+      20%,45%,70%,95% { width: 100%; }
+    }
+  
+    @keyframes cursor {
+      to { border-left: 2px solid transparent; }
+    }
+  
+    .animated-text span {
+      display: block; /* Ensures text is on a new line */
+      width: max-content; /* Adjusts width based on text */
+      margin: 0 auto; /* Centers the animated text */
+    }
+  
+    .animated-text span::before {
+      display: block;
+      text-align: center; /* Ensures text appears centered */
+      animation: words 9s infinite;
+    }
+  
+    .animated-text span::after {
+      display: block;
+      animation: cursor 1s infinite, typing 9s steps(14) infinite;
+    }
+  }
