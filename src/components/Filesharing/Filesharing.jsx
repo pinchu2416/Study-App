@@ -1,30 +1,30 @@
 import { createSignal, Show, For } from "solid-js";
 import logo from "../../assets/logo.png";
 import url from "../../assets/url.jpeg";
-import file from "../../assets/file.png";
 import bg from "../../assets/bg.gif";
+import "../../styles/global.css";
 
-function FileSharing() { //this function is for our file sharing app
-  const [files, setFiles] = createSignal([]); //keeps track of the uploaded file and starts with empty
-  const [progress, setProgress] = createSignal(0); //Tracks the upload progress (starts at 0%)
-  const [uploading, setUploading] = createSignal(false); //Checks if something is currently uploading (starts as false)
-  const [showPrompt, setShowPrompt] = createSignal(false); //Controls if the "Share File" options should be shown.
-  const [showEmailPrompt, setShowEmailPrompt] = createSignal(false); //Controls if the "Enter Email" box should be shown.
-  const [email, setEmail] = createSignal(""); //Stores the email entered by the user (starts empty).
-  const [selectedTab, setSelectedTab] = createSignal("URL Shortner"); //controls the tab switching part.
-  const [urlInput, seturlInput] = createSignal(""); // stores the url input and the seturlInput updates the ui whenever a value changes(reactive signal)
-  const [urlShorten, seturlShorten] = createSignal(""); //controls the url shortner part
+function File() { 
+  const [files, setFiles] = createSignal([]); 
+  const [progress, setProgress] = createSignal(0); 
+  const [uploading, setUploading] = createSignal(false); 
+  const [showPrompt, setShowPrompt] = createSignal(false); 
+  const [showEmailPrompt, setShowEmailPrompt] = createSignal(false); 
+  const [email, setEmail] = createSignal(""); 
+  const [selectedTab, setSelectedTab] = createSignal("URL Shortner"); 
+  const [urlInput, seturlInput] = createSignal(""); 
+  const [urlShorten, seturlShorten] = createSignal(""); 
 
-  const simulateUpload = () => { //This function "pretends" to upload a file. FAKE UPLOADER 
-    setUploading(true); //Marks upload as "started".
-    setProgress(0);  //Resets the progress bar to 0%.
-    let uploadInterval = setInterval(() => { //Starts a timer that runs every 200ms and Slowly increases the upload percentage.
+  const simulateUpload = () => {  
+    setUploading(true); 
+    setProgress(0);  
+    let uploadInterval = setInterval(() => { 
       setProgress((prev) => {
-        if (prev >= 100) { //If progress reaches 100%, stop the timer.
+        if (prev >= 100) { 
           clearInterval(uploadInterval);
-          setTimeout(() => { //After a short delay, hide "Uploading..." and show sharing options.
-            setUploading(false); //hides the uploading part
-            setShowPrompt(true); //the prompt is shown
+          setTimeout(() => { 
+            setUploading(false); 
+            setShowPrompt(true); 
           }, 500);
           return 100;
         }
@@ -33,27 +33,27 @@ function FileSharing() { //this function is for our file sharing app
     }, 200);
   };
 
-  const handleFileSelect = (event) => { //This function runs when a user picks a file.
-    const selected = event.target.files[0]; //Gets the first file.
-    if (!selected) return; //If no file is selected, do nothing.
+  const handleFileSelect = (event) => { 
+    const selected = event.target.files[0]; 
+    if (!selected) return; 
 
-    if (files().length>=1){ //can take upto 1 files at a time
+    if (files().length>=1){ 
       alert("You can take 1 file at a time to share");
       return;
     }
 
     const fileData = {
-      file: selected, // file → Stores the file itself
-      url: URL.createObjectURL(selected),  //url → Creates a temporary link to preview the file
-      expiresAt: Date.now() + 24 * 60 * 60 * 1000, //expiresAt → Sets an expiration time (24 hours later).
+      file: selected,
+      url: URL.createObjectURL(selected),  
+      expiresAt: Date.now() + 24 * 60 * 60 * 1000, 
     };
 
-    setFiles([...files(), fileData]); //Adds the file to the list.
-    simulateUpload(); //Starts the upload process.
+    setFiles([...files(), fileData]); 
+    simulateUpload(); 
   };
 
-  const sendEmail = () => { //Function to "send" the file via email.
-    if (!email()) { //If the email box is empty, show an alert
+  const sendEmail = () => { 
+    if (!email()) { 
       alert("Please enter an email!");
       return;
     }
@@ -125,8 +125,6 @@ function FileSharing() { //this function is for our file sharing app
   </ul>
 </div>
  </nav>
- {/* Tabs */}
-
  <div class="flex space-x-4 mt-3 -ml-185">
         <button
           class={` "bg-gradient-to-r from-[#3a675d] to-[#9ba4c8] 
@@ -153,22 +151,17 @@ function FileSharing() { //this function is for our file sharing app
          File Sharing
         </button>
       </div>
-
-      {/* URL SHORTNER TAB */}
-
       <Show when={selectedTab() === "URL Shortner"}>
   <div 
     class="text-white 5 mt-4 flex flex-col items-center -ml-176 bg-[#0a0f1f] rounded-4xl w-2/3 max-w-lg transition-all p-4 "
-    style={{ height: urlShorten() ? 'auto' : '25rem' }} // Expands dynamically
+    style={{ height: urlShorten() ? 'auto' : '25rem' }} 
   >
     <img class="w-auto h-auto -mt-2 ml-2 rounded-2xl" loading="lazy" src={url} alt="url" />
     <span class="text-cyan-200 pb-5 -mt-9 -ml-1 text-3xl [text-shadow:0px_0px_1px_rgb(98,228,255),0px_0px_2px_rgb(98,228,255)]">Cut the Clutter, Keep the Clicks ! </span>
-    {/* <h1 class="text-3xl font-bold mb-3 mt-2 text-yellow-100 [text-shadow:0px_0px_1px_rgb(98,228,255),0px_0px_3px_rgb(98,228,255)] ">URL Shortener</h1>
-     */}
     <input 
       type="text" 
       placeholder="Enter your URL..." 
-      class="px-4 py-2 mb-3 w-80 rounded-lg bg-gray-800 text-white border border-gray-600" 
+      class="px-4 py-2 w-80 rounded-lg bg-gray-800 text-white border border-gray-600" 
       value={urlInput()} /*binds the SolidJS signal urlInput() to the input field so that it reflects the latest state.*/
       onInput={(e) => seturlInput(e.target.value)} //Updates the urlInput state whenever the user types something.
     />
@@ -179,13 +172,12 @@ function FileSharing() { //this function is for our file sharing app
         rounded-[20px] shadow-lg transition-all duration-300 
         hover:scale-105 hover:shadow-xl 
       hover:from-[#4198b7] hover:to-[#21295b] 
-        active:scale-95  mt-3 -ml-[10px] "
+        active:scale-95  mt-5 -ml-[10px] mb-2 "
       onClick={() => {
         if (!urlInput()) {
           alert("Please enter a URL");
           return;
         }
-        // Mock short URL (replace with actual API logic later)
         seturlShorten(`https://short.ly/${Math.random().toString(36).substring(7)}`); // Math.random() - This function generates a random decimal number between 0 and 1, .toString(36)Converts the random number into a base-36 string, which includes numbers (0-9) and letters (a-z), .substring(7)Removes the "0." at the beginning and keeps only the random characters after that, Template Literal (\`` ``) - Embeds the random string into a shortened URL format:
       }}
     >
@@ -193,24 +185,20 @@ function FileSharing() { //this function is for our file sharing app
     </button>
 
     <Show when={urlShorten()}>
-      <div class="mt-1"> {/* Added spacing below */}
-        {/* <span class="text-gray-300 -ml-19">Short URL : </span> */}
+      <div class="mt-1"> 
         <input 
           type="text" 
           class="px-4 py-2 w-80 rounded-lg bg-gray-800 text-white border border-gray-600 mt-2" 
           value={urlShorten()} 
-          readonly //This prevents users from modifying the value in the input field.The user can copy the text, but not type in it. If readonly were removed, users could manually change the URL.
+          readonly
         />
       </div>
     </Show>
   </div>
 </Show>
-      {/* Show File Upload Section Only for Tab 2 */}
-
-
       <Show when={selectedTab() === "File Sharing"}>
         <div class="w-2/3 max-w-lg bg-[#0a0f1f] p-4 rounded-4xl transition-all -ml-173 mt-4 pointer-events-auto"
-          style={{ height: uploading() || files().length > 0 || showPrompt() || showEmailPrompt() ? 'auto' : '12rem' }}> {/* dynamically extends the height of the box  */}    
+          style={{ height: uploading() || files().length > 0 || showPrompt() || showEmailPrompt() ? 'auto' : '12rem' }}> 
           <div class="w-full h-40 border-2  border-dashed border-cyan-200 rounded-lg flex flex-col items-center justify-center text-gray-300 hover:border-blue-400 transition-all cursor-pointer">
             <p class="text-3xl pb-2 tracking-wide text-yellow-200 [text-shadow:0px_0px_1px_rgb(98,228,255),0px_0px_2px_rgb(98,228,255)] ">Drop your files here.</p>
             <label for="fileInput" class="cursor-pointer mt-2 p-2 bg-gradient-to-r from-[#3a675d] to-[#9ba4c8] 
@@ -221,7 +209,7 @@ function FileSharing() { //this function is for our file sharing app
         active:scale-95">
               Click to Upload
             </label>
-            <input id="fileInput" type="file" class="hidden" onChange={handleFileSelect} /> {/* here the type is file and whatever we upload it will remain hidden to the user then the handlefileselect() is called */}
+            <input id="fileInput" type="file" class="hidden" onChange={handleFileSelect} /> 
           </div>
           {/* stores the current upload progress (from 0 to 100). inside ${} → Inserts the value of progress() into a string. ${progress()}% → Converts the numeric value into a percentage progress() → Retrieves the current upload progress {progress()}% → Converts it into a readable percentage
           now the uploading() is called  */}
@@ -230,7 +218,7 @@ function FileSharing() { //this function is for our file sharing app
               <div class="text-gray-300 text-lg font-semibold">Uploading...</div>
               <div class="percent-container bg-gray-700 w-64 h-6 rounded-full mt-2 ml-28">
                 <div class="progress-bar bg-blue-500 h-6 rounded-full transition-all" style={{ width: `${progress()}%` }}></div>
-                <span class="percentage text-white font-bold absolute inset-0 flex items-center justify-center -ml-173 mt-43">{progress()}%</span>
+                <span class="percentage text-white font-bold absolute inset-0 flex items-center justify-center -ml-173 mt-41">{progress()}%</span>
               </div>
             </div>
           )}
@@ -361,10 +349,7 @@ function FileSharing() { //this function is for our file sharing app
 </div>
  </nav>       
  <div className="flex flex-col items-center z-0 top-[20%] ml-45 translate-x-[-50%] w-full max-w-[90%]">
-  {/* Background Image */}
   <img className="h-auto w-full pb-3" src={bg} alt="Background Animation" />
-
-  {/* Animated Text */}
   <div className="animated-text text-cyan-200 text-2xl ml-4 -mt-13 font-bold flex flex-col items-center text-center">
     Share files & shorten links
     <br />
@@ -374,8 +359,6 @@ function FileSharing() { //this function is for our file sharing app
         before:content-['Fast'] before:text-orange-400 before:animate-words">
     </span>
   </div>
-
-  {/* Tabs Section */}
   <div className="flex flex-nowrap justify-center items-center gap-2 mt-6 overflow-x-auto ml-4">
     <button
       className={`min-w-[120px] text-base px-3 py-2 font-bold rounded-[15px] shadow-md transition-all duration-300 
@@ -404,30 +387,22 @@ function FileSharing() { //this function is for our file sharing app
   <Show when={selectedTab() === "URL Shortner"}>
   <div 
     class="text-white mt-4 ml-6 flex flex-col items-center bg-[#0a0f1f] rounded-2xl w-full max-w-[90%] transition-all p-4"
-    style={{ height: urlShorten() ? 'auto' : '22rem' }} // Expands dynamically
-  >
-    {/* Image */}
-    <img class="w-auto h-auto mt-1 rounded-2xl" loading="lazy" src={url} alt="URL" />
-
-    {/* Heading */}
+    style={{ height: urlShorten() ? 'auto' : '22rem' }} >
+    <img class="w-auto h-auto mt-1 rounded-2xl" loading="lazy" src={url} alt="URL" /> 
     <span class="text-cyan-200 pb-4 text-xl sm:text-2xl text-center [text-shadow:0px_0px_1px_rgb(98,228,255),0px_0px_2px_rgb(98,228,255)]">
       Cut the Clutter, Keep the Clicks!
-    </span>
-
-    {/* Input Field */}
+    </span> 
     <input 
       type="text" 
       placeholder="Enter your URL..." 
-      class="px-3 py-2 mb-3 w-full max-w-[85%] rounded-lg bg-gray-800 text-white border border-gray-600 text-center" 
+      class="px-3 py-2  w-full max-w-[85%] rounded-lg bg-gray-800 text-white border border-gray-600 text-center" 
       value={urlInput()} 
       onInput={(e) => seturlInput(e.target.value)} 
     />
-
-    {/* Shorten Button */}
     <button 
       class="bg-gradient-to-r from-[#3a675d] to-[#375545] 
       text-black font-bold text-md px-2 py-2 w-full max-w-[45%]
-      rounded-xl shadow-lg transition-all duration-300 mt-2"
+      rounded-xl shadow-lg transition-all duration-300 mt-5 mb-3"
       onClick={() => {
         if (!urlInput()) {
           alert("Please enter a URL");
@@ -437,9 +412,7 @@ function FileSharing() { //this function is for our file sharing app
       }}
     >
       Shorten URL
-    </button>
-
-    {/* Display Shortened URL */}
+    </button> 
     <Show when={urlShorten()}>
       <div class="mt-2 w-full max-w-[85%]">
         <input 
@@ -455,9 +428,7 @@ function FileSharing() { //this function is for our file sharing app
 <Show when={selectedTab() === "File Sharing"}>
   <div 
     class="w-full max-w-[90%] bg-[#0a0f1f] p-4 rounded-2xl transition-all mt-4 pointer-events-auto ml-4"
-    style={{ height: uploading() || files().length > 0 || showPrompt() || showEmailPrompt() ? 'auto' : '10rem' }} 
-  >    
-    {/* Drag & Drop Area */}
+    style={{ height: uploading() || files().length > 0 || showPrompt() || showEmailPrompt() ? 'auto' : '10rem' }} >    
     <div class="w-full h-32 border-2 border-dashed border-cyan-200 rounded-lg flex flex-col items-center justify-center text-gray-300 hover:border-blue-400 transition-all cursor-pointer">
       <p class="text-lg sm:text-xl pb-2 tracking-wide text-yellow-200 text-center">
         Drop your files here.
@@ -472,21 +443,17 @@ function FileSharing() { //this function is for our file sharing app
       </label>
       <input id="fileInput" type="file" class="hidden" onChange={handleFileSelect} />
     </div>
-
-    {/* Uploading Progress Bar */}
     {uploading() && (
       <div class="mt-4 text-center w-full">
         <div class="text-gray-300 text-lg font-semibold">Uploading...</div>
         <div class="percent-container bg-gray-700 w-full max-w-[85%] h-6 rounded-full mt-2 mx-auto">
           <div class="progress-bar bg-blue-500 h-6 rounded-full transition-all" style={{ width: `${progress()}%` }}></div>
-          <span class="percentage text-white font-bold absolute inset-0 flex mt-107 items-center justify-center">
+          <span class="percentage text-white font-bold absolute inset-0 flex mt-110 items-center justify-center">
             {progress()}%
           </span>
         </div>
       </div>
     )}
-
-    {/* Uploaded Files List */}
     <div class="mt-4">
       <For each={files()}>
         {(file) => (
@@ -500,8 +467,6 @@ function FileSharing() { //this function is for our file sharing app
         )}
       </For>
     </div>
-
-    {/* Sharing Options */}
     {showPrompt() && (
       <div class="mt-5 text-center">
         <p class="text-yellow-500 text-lg mb-3">Share this file via:</p>
@@ -513,8 +478,6 @@ function FileSharing() { //this function is for our file sharing app
         </button>
       </div>
     )}
-
-    {/* Email Prompt */}
     {showEmailPrompt() && (
       <div class="mt-5 text-center">
         <p class="text-yellow-500 text-lg mb-3">Enter recipient email:</p>
@@ -536,4 +499,4 @@ function FileSharing() { //this function is for our file sharing app
     </>
   );
 }
-export default FileSharing;
+export default File;

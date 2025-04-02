@@ -1,0 +1,18 @@
+@keyframes type {
+    4% { content: "S"; }
+    50% { content: "Sn"; }
+    70% {content: "Snip";}
+    100% { content: "Snip it ! "; }
+  }
+  
+  @keyframes blink {
+    50% { border-color: transparent; }
+  }
+  
+  .typewriter::after {
+    content: "";
+    animation: type 4s forwards, blink 0.8s step-end infinite;
+    border-right: 3px solid orange;
+    padding-right: 5px;
+  }
+  
