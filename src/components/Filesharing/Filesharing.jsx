@@ -144,7 +144,7 @@ function File() {
         hover:scale-105 hover:shadow-xl 
       hover:from-[#4198b7] hover:to-[#21295b] 
         active:scale-95   ${
-            selectedTab() === "File Sharing" ? "bg-[#3a675d] text-black" : "bg-[#9ba4c8] text-black font-bold transition-all duration-300 hover:sclae-105 hover:shadow-xl hover:from-[#4198b7] hover:to-[#21295b] active:scale-95 "
+            selectedTab() === "File Sharing" ? "bg-[#3a675d] text-black" : "bg-[#9ba4c8] text-black font-bold transition-all duration-300 hover:scale-105 hover:shadow-xl hover:from-[#4198b7] hover:to-[#21295b] active:scale-95 "
           }`}
           onClick={() => setSelectedTab("File Sharing")}
         >
