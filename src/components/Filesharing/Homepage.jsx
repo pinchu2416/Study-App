@@ -88,7 +88,7 @@ function HomePage() {
         <div className="bg-[#040d24] flex flex-col items-center w-[26%] h-[250px] border-2 border-[#50c2ccaf] rounded-lg shadow-lg text-center text-white p-10">
           <h1 className="mt-2 text-4xl font-bold text-cyan-300 mb-4">NoteShare</h1>
           <p className="text-3xl text-yellow-200 mt-2 mb-5">Write, Share, Keep !</p>
-          <a className="bg-gradient-to-r from-[#3a675d] to-[#9ba4c8] text-black font-bold text-xl px-4 py-2 rounded-[20px] shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:from-[#4198b7] hover:to-[#21295b] active:scale-95" href="#">Create Notes</a>
+          <a className="bg-gradient-to-r from-[#3a675d] to-[#9ba4c8] text-black font-bold text-xl px-4 py-2 rounded-[20px] shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:from-[#4198b7] hover:to-[#21295b] active:scale-95" href="/notes">Create Notes</a>
         </div>
       </div>
     </div>
@@ -129,7 +129,7 @@ function HomePage() {
         <div className="bg-[#040d24] flex flex-col items-center border-2 w-80 h-48 ml-7 border-[#50c2ccaf] rounded-lg shadow-lg text-center text-white p-10">
           <h1 className="-mt-5 text-3xl font-bold text-cyan-300 mb-1">NoteShare</h1>
           <p className="text-2xl text-yellow-200 mt-2 mb-3">Write, Share, Keep !</p>
-          <a className="bg-gradient-to-r from-[#3a675d] to-[#9ba4c8] text-black font-bold text-xl px-4 py-2 rounded-[20px] shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:from-[#4198b7] hover:to-[#21295b] active:scale-95" href="#">Create notes</a>
+          <a className="bg-gradient-to-r from-[#3a675d] to-[#9ba4c8] text-black font-bold text-xl px-4 py-2 rounded-[20px] shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:from-[#4198b7] hover:to-[#21295b] active:scale-95" href="/notes">Create notes</a>
         </div>
 
       </div>
